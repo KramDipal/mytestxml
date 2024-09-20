@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/bgIdle"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/tvHeader"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editLotNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lot_number"
+        android:inputType="number"
+        android:importantForAutofill="no"
+        />
+
+    <EditText
+        android:id="@+id/editBagNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Bag_number"
+        android:inputType="number"
+        android:importantForAutofill="no"
+        />
+
+    <EditText
+        android:id="@+id/editNoPieces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/no_pieces"
+        android:inputType="number"
+        android:importantForAutofill="no"
+        />
+
+    <Button
+        android:id="@+id/btnDatePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#929292"
+        android:text="@string/btnDatePicker"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/editSaleDate"
+        android:text="@string/sales_date"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/editAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_amount"
+        android:inputType="numberDecimal"
+        android:importantForAutofill="no"
+        />
+
+    <EditText
+        android:id="@+id/editNoPiecesSold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/no_pieces_sold"
+        android:inputType="number"
+        android:importantForAutofill="no"
+        />
+
+    <EditText
+        android:id="@+id/editTotalIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/tot_income"
+        android:inputType="numberDecimal"
+        android:importantForAutofill="no"
+        />
+
+    <EditText
+        android:id="@+id/editRemarks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/remarks"
+        android:inputType="text"
+        />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#929292"
+        android:text="@string/btnSave"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#929292"
+        android:text="@string/btnClear"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#929292"
+        android:text="@string/btnExit"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+
+
+</LinearLayout>

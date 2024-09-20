@@ -1,0 +1,82 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "c795d78af70e9b3e8e7bf6a694ac31c8",
+    "entities": [
+      {
+        "tableName": "Inventory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `lotno` TEXT NOT NULL, `bagno` TEXT NOT NULL, `nopcs` TEXT NOT NULL, `date` TEXT NOT NULL, `income` TEXT NOT NULL, `pcssold` TEXT NOT NULL, `totinc` TEXT NOT NULL, `remarks` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lotno",
+            "columnName": "lotno",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bagno",
+            "columnName": "bagno",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nopcs",
+            "columnName": "nopcs",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "income",
+            "columnName": "income",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pcssold",
+            "columnName": "pcssold",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totinc",
+            "columnName": "totinc",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remarks",
+            "columnName": "remarks",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c795d78af70e9b3e8e7bf6a694ac31c8')"
+    ]
+  }
+}

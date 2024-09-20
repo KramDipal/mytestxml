@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyTestXML</string>
+    <string name="tvHeader">Wings Inventory</string>
+    <string name="btnDatePicker">Select Date</string>
+    <string name="btnSave">Save</string>
+    <string name="btnClear">Clear</string>
+    <string name="btnExit">Exit</string>
+    <string name="lot_number">Lot #:</string>
+    <string name="Bag_number">Bag #:</string>
+    <string name="no_pieces">Total no. of Pieces:</string>
+    <string name="sales_date">Select Sales Date:</string>
+    <string name="enter_amount">Enter amount: Php</string>
+    <string name="no_pieces_sold">No. of Pieces sold:</string>
+    <string name="tot_income">Total Income:</string>
+    <string name="remarks">Remarks:</string>
+</resources>
