@@ -13,8 +13,14 @@
         android:theme="@style/Theme.MyTestXML"
         tools:targetApi="31">
         <activity
+            android:name=".ReportActivity"
+            android:exported="false"
+            android:label="@string/title_activity_report"
+            android:theme="@style/Theme.MyTestXML" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

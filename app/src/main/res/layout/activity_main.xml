@@ -10,6 +10,24 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    <!--
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="false" />
+        -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +36,25 @@
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold" />
+    <Button
+        android:id="@+id/btnDatePicker2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#929292"
+        android:text="@string/btnDatePicker2"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
+    <TextView
+        android:id="@+id/editRestockDate"
+        android:text="@string/restock_date"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/editLotNumber"
         android:layout_width="match_parent"
@@ -37,14 +73,82 @@
         android:importantForAutofill="no"
         />
 
-    <EditText
-        android:id="@+id/editNoPieces"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/no_pieces"
-        android:inputType="number"
-        android:importantForAutofill="no"
-        />
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editNoPieces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/no_pieces"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#ff7477"
+            android:inputType="number"
+            android:importantForAutofill="no"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="#ff7477"
+            android:text="@string/Total_no_pcs_sold"
+            />
+        <TextView
+            android:id="@+id/editotnopcsold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#ff7477"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="#ff7477"
+            android:text="@string/balance"
+            />
+        <TextView
+            android:id="@+id/editbalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#ff7477"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="#ff7477"
+            android:text="@string/tot_amount"
+            />
+        <TextView
+            android:id="@+id/editotamount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#ff7477"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnDatePicker"
@@ -65,6 +169,15 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/editrxno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txn_no"
+        android:inputType="number"
+        android:importantForAutofill="no"
+         />
 
     <EditText
         android:id="@+id/editAmount"
@@ -101,37 +214,100 @@
         android:inputType="text"
         />
 
-    <Button
-        android:id="@+id/btnSave"
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="30dp">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:textColor="#929292"
-        android:text="@string/btnSave"
-        android:layout_marginTop="15dp"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-    <Button
-        android:id="@+id/btnClear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:textColor="#929292"
-        android:text="@string/btnClear"
-        android:layout_marginTop="15dp"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-    <Button
-        android:id="@+id/btnExit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:textColor="#929292"
-        android:text="@string/btnExit"
-        android:layout_marginTop="15dp"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
+        <Button
+            android:id="@+id/btnReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:text="@string/btnReport"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:background="@color/design_default_color_primary"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:text="@string/btnSave"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:background="@color/design_default_color_primary"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:text="@string/btnDelete"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:background="@color/design_default_color_primary"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:text="@string/btnUpdate"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:background="@color/design_default_color_primary"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/btnView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:text="@string/btnView"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:background="@color/design_default_color_primary"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:text="@string/btnClear"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:background="@color/design_default_color_primary"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/btnExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:text="@string/btnExit"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:background="@color/design_default_color_primary"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
