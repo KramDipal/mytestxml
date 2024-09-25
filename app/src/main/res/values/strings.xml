@@ -67,4 +67,9 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="btnGenerate">Generate by Lot Number</string>
+    <string name="btnGenerate2">Generate All Records</string>
+    <string name="btnBack">Main Menu</string>
+    <string name="lotnumber">Lot Number</string>
+    <string name="lotnumber2">Lot Number</string>
 </resources>

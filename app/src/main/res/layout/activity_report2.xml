@@ -20,4 +20,50 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
+
+    <Button
+        android:id="@+id/btnGenerate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnGenerate"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        style="?android:attr/buttonBarButtonStyle" />
+    <EditText
+        android:id="@+id/repLotNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/lotnumber2"
+        android:autofillHints="no"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btnGenerate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnGenerate2"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        style="?android:attr/buttonBarButtonStyle" />
+
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnBack"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        style="?android:attr/buttonBarButtonStyle" />
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_dark"
+        />
+
 </LinearLayout>

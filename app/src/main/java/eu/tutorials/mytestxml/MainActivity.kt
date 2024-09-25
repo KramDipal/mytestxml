@@ -80,6 +80,8 @@ class MainActivity : AppCompatActivity() {
 
 
         val editLotNumber: EditText = findViewById(R.id.editLotNumber)
+
+
         val editBagNumber: EditText = findViewById(R.id.editBagNumber)
         val editNoPieces: EditText = findViewById(R.id.editNoPieces)
         val editRestockDate: TextView = findViewById(R.id.editRestockDate)
@@ -140,6 +142,7 @@ class MainActivity : AppCompatActivity() {
 
                     Toast.makeText(this, "Record saved", Toast.LENGTH_LONG).show()
                     clearAllTextViews()
+                    editLotNumber.requestFocus() //By default cursor will be at lot number text field
                 } catch (e: Exception) {
                     println("An unexpected error occurred in adding a record: ${e.message}")
                 }
@@ -157,16 +160,19 @@ class MainActivity : AppCompatActivity() {
                     databaseHelper.deleteUser(editLotNumber.text.toString(), editSaleDate.text.toString()) // Example: Delete user with ID 1
                     Toast.makeText(this, "Button Delete", Toast.LENGTH_LONG).show()
                     clearAllTextViews()
+                    editLotNumber.requestFocus() //By default cursor will be at lot number text field
                 } catch (e: Exception) {
                     println("An unexpected error occurred in deleting a record: ${e.message}")
                 }
 
 
             }else{
-                Toast.makeText(this, "Please enter Lot Number", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please enter Lot Number and Check Transaction Date", Toast.LENGTH_LONG).show()
             }
         }
 
+
+        //Update by Lot number and Transaction date
         btnUpdate.setOnClickListener {
 
             if(editLotNumber.text.isNotEmpty() && editSaleDate.text.isNotEmpty())
@@ -199,7 +205,8 @@ class MainActivity : AppCompatActivity() {
                 try {
                     databaseHelper.updateUser(user) // Example: update user with ID 1
 
-                    Toast.makeText(this, "Button Update", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Record updated!", Toast.LENGTH_LONG).show()
+                    editLotNumber.requestFocus() //By default cursor will be at lot number text field
                 } catch (e: Exception) {
                     println("An unexpected error occurred in updating a record: ${e.message}")
                 }
@@ -210,21 +217,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //Search / View by Lot number, cursor.moveToLast will return the last transaction
         btnView.setOnClickListener {
 
+            //if(editLotNumber.text.isNotEmpty() && editrxno.text.isNotEmpty()) {
             if(editLotNumber.text.isNotEmpty()) {
 
-                Log.i("btnView","${editrxno.text.toString()} ${editLotNumber.text.toString()} ${editSaleDate.text.toString()}")
+                //Log.i("btnView","${editrxno.text.toString()} ${editLotNumber.text.toString()} ${editSaleDate.text.toString()}")
                 try {
                     val user =
-                        databaseHelper.getUser(editrxno.text.toString(), editLotNumber.text.toString(), editSaleDate.text.toString()) // Example: Get user with ID 1
+                        //databaseHelper.getUser(editrxno.text.toString(), editLotNumber.text.toString(), editSaleDate.text.toString()) // Example: Get user with ID 1
+                        databaseHelper.getUser(editLotNumber.text.toString()) // Example: Get user with ID 1
+
+
+                   //Log.i("user.toString().length", "${user.toString().length}")
+
 
 
                     //editLotNumber.setText(user?.lot_number)
                     editBagNumber.setText(user?.bag_number)
                     editNoPieces.setText(user?.total_no_of_pieces)
                     editRestockDate.text = user?.restock_date
-                    //editSaleDate.text = user?.transaction_date
+                    editSaleDate.text = user?.transaction_date
                     //editrxno.setText(user!!.id)
                     editAmount.setText(user!!.amount)
                     editNoPiecesSold.setText(user.no_of_pcs_sold)
@@ -241,12 +255,15 @@ class MainActivity : AppCompatActivity() {
                     editotamount.text = user.totamount
 
 
-                    Toast.makeText(this, "Button View", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Record found!", Toast.LENGTH_LONG).show()
+                    editLotNumber.requestFocus() //By default cursor will be at lot number text field
                 } catch (e: Exception) {
                     println("An unexpected error occurred in Viewing a record: ${e.message}")
+                    Toast.makeText(this, "No record found!", Toast.LENGTH_LONG).show()
                 }
             }else{
-                Toast.makeText(this, "Search fields (Lot # | Transaction ID) is empty!", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this, "One of the following fields is empty (Lot # | Transaction ID | Transaction date)", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please enter a LOT number", Toast.LENGTH_LONG).show()
             }
 
         }
@@ -269,6 +286,7 @@ class MainActivity : AppCompatActivity() {
         btnClear.setOnClickListener {
             Toast.makeText(this, "Button Clear", Toast.LENGTH_LONG).show()
             clearAllTextViews()
+            editLotNumber.requestFocus() //By default cursor will be at lot number text field
 
         }
 

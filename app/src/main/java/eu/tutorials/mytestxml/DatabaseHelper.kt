@@ -9,7 +9,7 @@ import android.util.Log
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
-        private const val DATABASE_VERSION = 8
+        private const val DATABASE_VERSION = 12
         private const val DATABASE_NAME = "InventoryDatabase"
         private const val TABLE_USERS = "Inventory"
         private const val KEY_ID = "id"
@@ -60,7 +60,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return success
     }
 
-    fun getUser(txnID: String, lotID: String, txnDate: String): User? {
+    //fun getUser(txnID: String, lotID: String, txnDate: String): User? {
+    fun getUser(lotID: String): User? {
         val db = this.readableDatabase
         val cursor: Cursor = db.query(TABLE_USERS, arrayOf(KEY_ID,
             KEY_LOT,
@@ -73,8 +74,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             KEY_NOPS,
             KEY_TNOPS,
             KEY_TOTINC,
-            KEY_REMARKS), "$KEY_ID=? AND $KEY_LOT=? AND $KEY_TXNDATE=?", arrayOf(txnID, lotID, txnDate), null, null, null)
-        cursor.moveToFirst()
+            //KEY_REMARKS), "$KEY_ID=? AND $KEY_LOT=? AND $KEY_TXNDATE=?", arrayOf(txnID, lotID, txnDate), null, null, null)
+            KEY_REMARKS), "$KEY_LOT=?", arrayOf(lotID), null, null, null)
+        //cursor.moveToFirst()
+        cursor.moveToLast()
         val user = User(cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getString(2),
@@ -119,5 +122,67 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val success = db.delete(TABLE_USERS, "$KEY_LOT=? AND $KEY_TXNDATE=?", arrayOf(id, txnDate))
         db.close()
         return success
+    }
+
+    fun getAllUsers(): List<User> {
+
+        val UsersList = ArrayList<User>()
+        val selectQuery = "SELECT * FROM $TABLE_USERS"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val person = User(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)),
+                    lot_number = cursor.getString(cursor.getColumnIndexOrThrow(KEY_LOT)),
+                    bag_number = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BAG)),
+                    restock_date = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RESDATE)),
+                    total_no_of_pieces = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOP)),
+                    transaction_date = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TXNDATE)),
+                    amount = cursor.getString(cursor.getColumnIndexOrThrow(KEY_AMT)),
+                    totamount = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOTAMT)),
+                    no_of_pcs_sold = cursor.getString(cursor.getColumnIndexOrThrow(KEY_NOPS)),
+                    tot_no_of_pcs_sold = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TNOPS)),
+                    total_income = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOTINC)),
+                    remarks = cursor.getString(cursor.getColumnIndexOrThrow(KEY_REMARKS))
+
+                )
+                UsersList.add(person)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return UsersList
+    }
+
+    fun getByUsers(lotNum: String): List<User> {
+
+        val UsersList = ArrayList<User>()
+        val selectQuery = "SELECT * FROM $TABLE_USERS WHERE $KEY_LOT=$lotNum"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val person = User(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)),
+                    lot_number = cursor.getString(cursor.getColumnIndexOrThrow(KEY_LOT)),
+                    bag_number = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BAG)),
+                    restock_date = cursor.getString(cursor.getColumnIndexOrThrow(KEY_RESDATE)),
+                    total_no_of_pieces = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOP)),
+                    transaction_date = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TXNDATE)),
+                    amount = cursor.getString(cursor.getColumnIndexOrThrow(KEY_AMT)),
+                    totamount = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOTAMT)),
+                    no_of_pcs_sold = cursor.getString(cursor.getColumnIndexOrThrow(KEY_NOPS)),
+                    tot_no_of_pcs_sold = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TNOPS)),
+                    total_income = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOTINC)),
+                    remarks = cursor.getString(cursor.getColumnIndexOrThrow(KEY_REMARKS))
+
+                )
+                UsersList.add(person)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return UsersList
     }
 }
