@@ -9,7 +9,7 @@ import android.util.Log
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
-        private const val DATABASE_VERSION = 12
+        private const val DATABASE_VERSION = 15
         private const val DATABASE_NAME = "InventoryDatabase"
         private const val TABLE_USERS = "Inventory"
         private const val KEY_ID = "id"
@@ -61,7 +61,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     //fun getUser(txnID: String, lotID: String, txnDate: String): User? {
-    fun getUser(lotID: String): User? {
+    fun getUser(lotID: String, bgNum: String): User? {
         val db = this.readableDatabase
         val cursor: Cursor = db.query(TABLE_USERS, arrayOf(KEY_ID,
             KEY_LOT,
@@ -75,7 +75,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             KEY_TNOPS,
             KEY_TOTINC,
             //KEY_REMARKS), "$KEY_ID=? AND $KEY_LOT=? AND $KEY_TXNDATE=?", arrayOf(txnID, lotID, txnDate), null, null, null)
-            KEY_REMARKS), "$KEY_LOT=?", arrayOf(lotID), null, null, null)
+            KEY_REMARKS), "$KEY_LOT=? AND $KEY_BAG=?", arrayOf(lotID, bgNum), null, null, null)
         //cursor.moveToFirst()
         cursor.moveToLast()
         val user = User(cursor.getInt(0),
@@ -112,14 +112,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             put(KEY_REMARKS, user.remarks)
         }
         //val success = db.update(TABLE_USERS, contentValues, "$KEY_LOT=?", arrayOf(user.id.toString()))
-        val success = db.update(TABLE_USERS, contentValues, "$KEY_LOT=? AND $KEY_TXNDATE=?", arrayOf(user.lot_number, user.transaction_date))
+        val success = db.update(TABLE_USERS, contentValues, "$KEY_LOT=? AND $KEY_BAG=?", arrayOf(user.lot_number, user.bag_number))
         db.close()
         return success
     }
 
-    fun deleteUser(id: String, txnDate: String): Int {
+    fun deleteUser(id: String, bagNum: String): Int {
         val db = this.writableDatabase
-        val success = db.delete(TABLE_USERS, "$KEY_LOT=? AND $KEY_TXNDATE=?", arrayOf(id, txnDate))
+        val success = db.delete(TABLE_USERS, "$KEY_LOT=? AND $KEY_BAG=?", arrayOf(id, bagNum))
         db.close()
         return success
     }
