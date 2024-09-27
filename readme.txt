@@ -10,7 +10,7 @@ Added CRUD with sqlite database.
 5. Added column to User class (totamount, tot_no_of_pcs_sold)
 
 
-09/26/24
+09/25/24
 1. Added Toast message in View function.
 2. updated DATABASE_VERSION = 9 to accomodate cursor.moveToLast() for view function.
 3. Added select All functionality in report window screen.
@@ -23,3 +23,9 @@ Added Generate, home and listView
 DATABASE_VERSION = 12
 8. Added editLotNumber.requestFocus().
 Make lot number text field the default entry point for the cursor.
+
+
+09/26/24
+1. Enhance search and add item routine.
+- save stock per bag # and stock count
+- getUser/ search by lotID: String, bgNum: String
