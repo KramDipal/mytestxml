@@ -12,12 +12,13 @@
     <string name="btnClear">Clear</string>
     <string name="btnExit">Exit</string>
     <string name="lot_number">Lot #:</string>
+    <string name="lot_number2">Lot #2:</string>
     <string name="Bag_number">Bag #:</string>
     <string name="no_pieces">Total no. of Pieces:</string>
     <string name="tot_amount">Total Amt: Php</string>
     <string name="Total_no_pcs_sold">Total no. of pcs sold:</string>
     <string name="restock_date">""</string>
-    <string name="sales_date">""</string>
+    <string name="sales_date">"Sales Date"</string>
     <string name="enter_amount">Sales amount: Php</string>
     <string name="txn_no">Trans. no.</string>
     <string name="no_pieces_sold">No. of Pieces sold:</string>
@@ -72,4 +73,6 @@
     <string name="btnBack">Main Menu</string>
     <string name="lotnumber">Lot Number</string>
     <string name="lotnumber2">Lot Number</string>
+    <string name="btnSearch">Search</string>
+    <string name="delete_button2">Delete button</string>
 </resources>

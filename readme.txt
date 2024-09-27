@@ -7,6 +7,7 @@ Added CRUD with sqlite database.
 2. added code in mainActivity to support displays.
 3. Added condition for view, update, delete and Save.
 4. adjust DATABASE_VERSION = 8
+<<<<<<< HEAD
 5. Added column to User class (totamount, tot_no_of_pcs_sold)
 
 
@@ -29,3 +30,10 @@ Make lot number text field the default entry point for the cursor.
 1. Enhance search and add item routine.
 - save stock per bag # and stock count
 - getUser/ search by lotID: String, bgNum: String
+=======
+5. Added column to User class (totamount, tot_no_of_pcs_sold)
+>>>>>>> parent of 84e99a6 (Enhancement 04)
+
+09/27/24
+1. Removed Search and delete button.
+2. replaced with search / delete icon.

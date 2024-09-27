@@ -45,7 +45,6 @@
         android:text="@string/btnDatePicker2"
         android:layout_marginTop="15dp"
         android:textStyle="bold"
-
         android:textSize="20sp"/>
 
     <TextView
@@ -56,14 +55,39 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/editLotNumber"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/lot_number"
-        android:inputType="number"
-        android:importantForAutofill="no"
-        />
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editLotNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/lot_number"
+            android:inputType="number"
+            android:importantForAutofill="no"
+            tools:ignore="MissingConstraints"/>
+
+        <Button
+            android:id="@+id/btnSearch"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:icon="@android:drawable/ic_menu_search"
+            app:iconGravity="textStart"
+            app:iconSize="25dp"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_editor_absoluteX="25dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="-3dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <EditText
         android:id="@+id/editBagNumber"
@@ -87,67 +111,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/no_pieces"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#ff7477"
-            android:inputType="number"
             android:importantForAutofill="no"
-            />
+            android:inputType="number"
+            android:textColor="#ff7477"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:textColor="#ff7477"
+            android:layout_marginStart="15dp"
             android:text="@string/Total_no_pcs_sold"
-            />
+            android:textColor="#ff7477"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/editotnopcsold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:textStyle="bold"
-            android:textSize="20sp"
+            android:layout_marginStart="15dp"
+            android:importantForAutofill="no"
             android:textColor="#ff7477"
-            android:importantForAutofill="no" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:textColor="#ff7477"
+            android:layout_marginStart="10dp"
             android:text="@string/balance"
-            />
+            android:textColor="#ff7477"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/editbalance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:textColor="#ff7477"
             android:textSize="50sp"
-            android:textColor="#ff7477"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:textColor="#ff7477"
+            android:layout_marginStart="5dp"
             android:text="@string/tot_amount"
-            />
+            android:textColor="#ff7477"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/editotamount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:textColor="#ff7477"
             android:textSize="20sp"
-            android:textColor="#ff7477"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -162,14 +185,48 @@
         android:textStyle="bold"
         android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/editSaleDate"
-        android:text="@string/sales_date"
-        android:layout_marginTop="15dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/editSaleDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/sales_date"
+            android:importantForAutofill="no"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+             />
+
+
+        <Button
+            android:id="@+id/btnDeleteRec"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconGravity="textStart"
+            app:iconSize="25dp"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_editor_absoluteX="25dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="-3dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <EditText
         android:id="@+id/editrxno"
@@ -249,17 +306,6 @@
             android:textSize="20sp"/>
 
         <Button
-            android:id="@+id/btnDelete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#FFFFFF"
-            android:textColor="@color/white"
-            android:text="@string/btnDelete"
-            android:layout_marginTop="15dp"
-            android:textStyle="bold"
-            android:background="@color/design_default_color_primary"
-            android:textSize="20sp"/>
-        <Button
             android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -270,6 +316,20 @@
             android:textStyle="bold"
             android:background="@color/design_default_color_primary"
             android:textSize="20sp"/>
+
+        <!--
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:text="@string/btnDelete"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:background="@color/design_default_color_primary"
+            android:textSize="20sp"/>
+
 
         <Button
             android:id="@+id/btnView"
@@ -282,6 +342,7 @@
             android:textStyle="bold"
             android:background="@color/design_default_color_primary"
             android:textSize="20sp"/>
+        -->
 
         <Button
             android:id="@+id/btnClear"

@@ -72,11 +72,13 @@ class MainActivity : AppCompatActivity() {
         val btnDatePicker2 :Button = findViewById(R.id.btnDatePicker2)
         val btnExit :Button = findViewById(R.id.btnExit)
         val btnSave :Button = findViewById(R.id.btnSave)
-        val btnDelete :Button = findViewById(R.id.btnDelete)
+        //val btnDelete :Button = findViewById(R.id.btnDelete)
         val btnUpdate :Button = findViewById(R.id.btnUpdate)
-        val btnView :Button = findViewById(R.id.btnView)
+        //val btnView :Button = findViewById(R.id.btnView)
         val btnReport : Button = findViewById(R.id.btnReport)
         val btnClear: Button = findViewById(R.id.btnClear)
+        val btnSearch: Button = findViewById(R.id.btnSearch)
+        val btnDeleteRec: Button = findViewById(R.id.btnDeleteRec)
 
 
         val editLotNumber: EditText = findViewById(R.id.editLotNumber)
@@ -115,7 +117,7 @@ class MainActivity : AppCompatActivity() {
 
             if(!isEmptyFields) {
 
-                /*val totalAMount: Int = if(editotamount.text.isEmpty()){
+                val totalAMount: Int = if(editotamount.text.isEmpty()){
                     editAmount.text.toString().toInt()
                 } else {
                     editotamount.text.toString().toInt() + editAmount.text.toString().toInt()
@@ -127,26 +129,17 @@ class MainActivity : AppCompatActivity() {
                 else {
                    editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString().toInt()
                 }
-                */
 
                 Log.d("isEmptyFields/ HERE", isEmptyFields.toString())
                 try {
-                    /*val user = User(
+                    val user = User(
                         0, editLotNumber.text.toString(),
                         editBagNumber.text.toString(), editRestockDate.text.toString(),
                         editNoPieces.text.toString(), editSaleDate.text.toString(),
                         editAmount.text.toString(), totalAMount.toString(),
                         editNoPiecesSold.text.toString(), totalNoOfPcSold.toString(),
                         editTotalIncome.text.toString(), editRemarks.text.toString()
-                    )*/
-
-                    val user = User(
-                    0, editLotNumber.text.toString(),
-                    editBagNumber.text.toString(), editRestockDate.text.toString(),
-                    editNoPieces.text.toString(), null,
-                        null, null,
-                        null, null,
-                        null, null)
+                    )
                     databaseHelper.addUser(user)
 
                     Toast.makeText(this, "Record saved", Toast.LENGTH_LONG).show()
@@ -161,22 +154,38 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-        btnDelete.setOnClickListener {
+        //btnDelete.setOnClickListener {
+        btnDeleteRec.setOnClickListener {
 
             if (editLotNumber.text.isNotEmpty()) {
 
                 try {
-                    databaseHelper.deleteUser(editLotNumber.text.toString(), editBagNumber.text.toString()) // Example: Delete user with ID 1
-                    Toast.makeText(this, "Record Delete", Toast.LENGTH_LONG).show()
+                    val grandTotPcsSold =
+                        editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString()
+                            .toInt()
+                    val editotamountupdate =
+                        editotamount.text.toString().toInt() + editAmount.text.toString().toInt()
+
+                    val inBalance = editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString().toInt()
+
+                    editotnopcsold.text = grandTotPcsSold.toString()
+                    editBalance.text = inBalance.toString()
+                    editotamount.text = editotamountupdate.toString()
+
+                    //databaseHelper.deleteUser(editLotNumber.text.toString(), editSaleDate.text.toString()) // Example: Delete user with ID 1
+                    databaseHelper.deleteUser(editSaleDate.text.toString()) // Example: Delete user with ID 1
+                    Toast.makeText(this, "Button Delete", Toast.LENGTH_LONG).show()
                     clearAllTextViews()
                     editLotNumber.requestFocus() //By default cursor will be at lot number text field
+
+
                 } catch (e: Exception) {
                     println("An unexpected error occurred in deleting a record: ${e.message}")
                 }
 
 
             }else{
-                Toast.makeText(this, "Please enter Lot Number and Bag Number", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please enter Lot Number and Check Transaction Date", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -186,30 +195,13 @@ class MainActivity : AppCompatActivity() {
 
             if(editLotNumber.text.isNotEmpty() && editSaleDate.text.isNotEmpty())
             {
-                /*
                 val grandTotPcsSold =
                     editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString()
                         .toInt()
                 val editotamountupdate =
                     editotamount.text.toString().toInt() + editAmount.text.toString().toInt()
-                */
 
-                val grandTotPcsSold: Int = if(editotnopcsold.text.isEmpty()){
-                    editNoPiecesSold.text.toString().toInt()
-                } else {
-                    editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString()
-                        .toInt()
-                }
-
-                val editotamountupdate: Int = if(editotamount.text.isEmpty()){
-                    editAmount.text.toString().toInt()
-                } else {
-                    editotamount.text.toString().toInt() + editAmount.text.toString().toInt()
-                }
-
-
-
-                    val user = User(
+                val user = User(
                     0, editLotNumber.text.toString(),
                     editBagNumber.text.toString(), editRestockDate.text.toString(),
                     editNoPieces.text.toString(), editSaleDate.text.toString(),
@@ -219,7 +211,7 @@ class MainActivity : AppCompatActivity() {
                 )
 
 
-                val inBalance = user.total_no_of_pieces.toInt() - user.tot_no_of_pcs_sold!!.toInt()
+                val inBalance = user.total_no_of_pieces.toInt() - user.tot_no_of_pcs_sold.toInt()
 
 
                 editotnopcsold.text = grandTotPcsSold.toString()
@@ -244,23 +236,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Search / View by Lot number, cursor.moveToLast will return the last transaction
-        btnView.setOnClickListener {
+        //btnView.setOnClickListener {
+        btnSearch.setOnClickListener{
 
             //if(editLotNumber.text.isNotEmpty() && editrxno.text.isNotEmpty()) {
-            if(editLotNumber.text.isNotEmpty() && editBagNumber.text.isNotEmpty()) {
+            if(editLotNumber.text.isNotEmpty()) {
 
-                //Log.i("btnView","${editrxno.text.toString()} ${editLotNumber.text.toString()} ${editSaleDate.text.toString()}")
+                Log.i("btnView","${editrxno.text.toString()} ${editLotNumber.text.toString()} ${editSaleDate.text.toString()}")
                 try {
                     val user =
                         //databaseHelper.getUser(editrxno.text.toString(), editLotNumber.text.toString(), editSaleDate.text.toString()) // Example: Get user with ID 1
-                        databaseHelper.getUser(editLotNumber.text.toString(), editBagNumber.text.toString()) // Example: Get user with ID 1
+                        databaseHelper.getUser(editLotNumber.text.toString()) // Example: Get user with ID 1
 
 
                    //Log.i("user.toString().length", "${user.toString().length}")
 
 
 
-                    //editLotNumber.setText(user?.lot_number)
+                    editLotNumber.setText(user?.lot_number)
                     editBagNumber.setText(user?.bag_number)
                     editNoPieces.setText(user?.total_no_of_pieces)
                     editRestockDate.text = user?.restock_date
@@ -273,7 +266,7 @@ class MainActivity : AppCompatActivity() {
                     editRemarks.setText(user.remarks)
 
                     val inBalance =
-                        user.total_no_of_pieces.toInt() - user.tot_no_of_pcs_sold!!.toInt()
+                        user.total_no_of_pieces.toInt() - user.tot_no_of_pcs_sold.toInt()
 
 
                     editotnopcsold.text = user.tot_no_of_pcs_sold
@@ -285,11 +278,11 @@ class MainActivity : AppCompatActivity() {
                     editLotNumber.requestFocus() //By default cursor will be at lot number text field
                 } catch (e: Exception) {
                     println("An unexpected error occurred in Viewing a record: ${e.message}")
-                    Toast.makeText(this, "No Sales record found!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "No record found!", Toast.LENGTH_LONG).show()
                 }
             }else{
                 //Toast.makeText(this, "One of the following fields is empty (Lot # | Transaction ID | Transaction date)", Toast.LENGTH_LONG).show()
-                Toast.makeText(this, "Missing LOT number | Bag NUmber", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please enter a LOT number", Toast.LENGTH_LONG).show()
             }
 
         }
@@ -420,14 +413,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAllTextViews() : Boolean
     {
-        var isEmptyFields = false
-        /*val textViewIds = listOf(R.id.editLotNumber, R.id.editRestockDate,
-            R.id.editBagNumber, R.id.editNoPieces, R.id.editSaleDate,
-            R.id.editAmount, R.id.editNoPiecesSold, R.id.editRemarks)*/
-
+        var isEmptyFields: Boolean = false
         val textViewIds = listOf(R.id.editLotNumber, R.id.editRestockDate,
-        R.id.editBagNumber)
-
+            R.id.editBagNumber, R.id.editNoPieces, R.id.editSaleDate,
+            R.id.editAmount, R.id.editNoPiecesSold, R.id.editRemarks)
         for (id in textViewIds) {
             val textView: TextView = findViewById(id)
 
