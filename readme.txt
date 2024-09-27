@@ -37,3 +37,8 @@ Make lot number text field the default entry point for the cursor.
 09/27/24
 1. Removed Search and delete button.
 2. replaced with search / delete icon.
+
+09/27/24 - 2nd iteration
+1. Removed Search and delete button.
+2. replaced button with search / delete / report/ save/update/ clear and exit icon.
+3. Added rounded_box.xml for lot # and Search box effect

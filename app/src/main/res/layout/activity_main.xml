@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/bgIdle"
+    android:background="#a2d2ff"
     android:padding="16dp"
     tools:context=".MainActivity">
 
@@ -27,6 +27,8 @@
         app:navGraph="@navigation/nav_graph"
         app:defaultNavHost="false" />
         -->
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,7 +58,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/rounded_box"
+        android:padding="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -84,8 +90,6 @@
             app:layout_editor_absoluteX="25dp"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="-3dp" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -272,6 +276,91 @@
         android:inputType="text"
         />
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <Button
+                android:id="@+id/btnReport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/report_item"
+                app:icon="@drawable/ic_report2"
+                app:iconGravity="textStart"
+                app:iconPadding="15dp"
+                app:iconSize="50dp"
+                app:iconTintMode="add"
+                style="?android:attr/buttonBarButtonStyle">
+
+            </Button>
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_item"
+                app:icon="@drawable/ic_save2"
+                app:iconGravity="textStart"
+                app:iconPadding="15dp"
+                app:iconSize="50dp"
+                app:iconTintMode="add"
+                style="?android:attr/buttonBarButtonStyle">
+
+            </Button>
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update_item"
+                app:icon="@drawable/ic_update2"
+                app:iconGravity="textStart"
+                app:iconPadding="15dp"
+                app:iconSize="50dp"
+                app:iconTintMode="add"
+                style="?android:attr/buttonBarButtonStyle">
+
+            </Button>
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clear_item"
+                app:icon="@drawable/ic_clear2"
+                app:iconGravity="textStart"
+                app:iconPadding="15dp"
+                app:iconSize="50dp"
+                app:iconTintMode="add"
+                style="?android:attr/buttonBarButtonStyle">
+
+            </Button>
+
+            <Button
+                android:id="@+id/btnExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Exit_item"
+                app:icon="@drawable/ic_exit2"
+                app:iconGravity="textStart"
+                app:iconPadding="15dp"
+                app:iconSize="50dp"
+                app:iconTintMode="add"
+                style="?android:attr/buttonBarButtonStyle">
+
+            </Button>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+    <!--
 <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -317,7 +406,7 @@
             android:background="@color/design_default_color_primary"
             android:textSize="20sp"/>
 
-        <!--
+
         <Button
             android:id="@+id/btnDelete"
             android:layout_width="match_parent"
@@ -342,7 +431,6 @@
             android:textStyle="bold"
             android:background="@color/design_default_color_primary"
             android:textSize="20sp"/>
-        -->
 
         <Button
             android:id="@+id/btnClear"
@@ -368,8 +456,54 @@
             android:textSize="20sp"/>
     </LinearLayout>
 
-
-
 </com.google.android.material.card.MaterialCardView>
+
+
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="@color/white"
+        android:text="@string/btnClear"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:background="@color/design_default_color_primary"
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="@color/white"
+        android:text="@string/btnExit"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:background="@color/design_default_color_primary"
+        android:textSize="20sp"/>
+           -->
+
+    <!--
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/nav_host_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:menu="@menu/bottom_nav_menu"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    -->
+
+
 
 </LinearLayout>

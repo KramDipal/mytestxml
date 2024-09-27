@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
@@ -20,7 +21,8 @@ import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import eu.tutorials.mytestxml.databinding.FragmentFirstBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+//import eu.tutorials.mytestxml.databinding.FragmentFirstBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -66,6 +68,10 @@ class MainActivity : AppCompatActivity() {
 
 
         databaseHelper = DatabaseHelper(this)
+        //val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        //val bottomNavReport: BottomNavigationView = findViewById(R.id.nav_save)
+        //bottomNavReport.background = ContextCompat.getDrawable(this, R.drawable.save)
+
 
 
         val btnDatePicker : Button = findViewById(R.id.btnDatePicker)
@@ -101,12 +107,144 @@ class MainActivity : AppCompatActivity() {
         val editrxno: TextView = findViewById(R.id.editrxno)
         //editrxno.isEnabled = false
 
+        /*
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+
+
+                R.id.nav_report -> {
+                    Toast.makeText(this,"Report button", Toast.LENGTH_LONG).show()
+
+                    val intent = Intent(this, ReportActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    // Handle Home action
+                    true
+                }
+
+                R.id.nav_save -> {
+                    // Handle Dashboard action
+                    Toast.makeText(this,"Save button", Toast.LENGTH_LONG).show()
+
+                    //TODO - add computation here for total pcs sold and total amount
+                    //TODO - need to have select query to get the latest pcs count and amount per LOT number.
+                    val isEmptyFields = checkAllTextViews()
+                    Log.d("isEmptyFields", isEmptyFields.toString())
+
+                    if(!isEmptyFields) {
+
+                        val totalAMount: Int = if(editotamount.text.isEmpty()){
+                            editAmount.text.toString().toInt()
+                        } else {
+                            editotamount.text.toString().toInt() + editAmount.text.toString().toInt()
+                        }
+
+                        val totalNoOfPcSold: Int = if(editotnopcsold.text.isEmpty()){
+                            editNoPiecesSold.text.toString().toInt()
+                        }
+                        else {
+                            editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString().toInt()
+                        }
+
+                        Log.d("isEmptyFields/ HERE", isEmptyFields.toString())
+                        try {
+                            val user = User(
+                                0, editLotNumber.text.toString(),
+                                editBagNumber.text.toString(), editRestockDate.text.toString(),
+                                editNoPieces.text.toString(), editSaleDate.text.toString(),
+                                editAmount.text.toString(), totalAMount.toString(),
+                                editNoPiecesSold.text.toString(), totalNoOfPcSold.toString(),
+                                editTotalIncome.text.toString(), editRemarks.text.toString()
+                            )
+                            databaseHelper.addUser(user)
+
+                            Toast.makeText(this, "Record saved", Toast.LENGTH_LONG).show()
+                            clearAllTextViews()
+                            editLotNumber.requestFocus() //By default cursor will be at lot number text field
+                        } catch (e: Exception) {
+                            println("An unexpected error occurred in adding a record: ${e.message}")
+                        }
+
+                    }else{
+                        Log.d("isEmptyFields-ELSE", isEmptyFields.toString())
+                    }
+                    true
+                }
+
+                R.id.nav_update -> {
+                    // Handle Notifications action
+                    Toast.makeText(this,"Update button", Toast.LENGTH_LONG).show()
+                    if(editLotNumber.text.isNotEmpty() && editSaleDate.text.isNotEmpty())
+                    {
+                        val grandTotPcsSold =
+                            editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString()
+                                .toInt()
+                        val editotamountupdate =
+                            editotamount.text.toString().toInt() + editAmount.text.toString().toInt()
+
+                        val user = User(
+                            0, editLotNumber.text.toString(),
+                            editBagNumber.text.toString(), editRestockDate.text.toString(),
+                            editNoPieces.text.toString(), editSaleDate.text.toString(),
+                            editAmount.text.toString(), editotamountupdate.toString(),
+                            editNoPiecesSold.text.toString(), grandTotPcsSold.toString(),
+                            editTotalIncome.text.toString(), editRemarks.text.toString()
+                        )
+
+
+                        val inBalance = user.total_no_of_pieces.toInt() - user.tot_no_of_pcs_sold.toInt()
+
+
+                        editotnopcsold.text = grandTotPcsSold.toString()
+                        editBalance.text = inBalance.toString()
+                        editotamount.text = editotamountupdate.toString()
+
+                        /*TODO add computation here for total pcs sold*/
+
+                        try {
+                            databaseHelper.updateUser(user) // Example: update user with ID 1
+
+                            Toast.makeText(this, "Record updated!", Toast.LENGTH_LONG).show()
+                            editLotNumber.requestFocus() //By default cursor will be at lot number text field
+                        } catch (e: Exception) {
+                            println("An unexpected error occurred in updating a record: ${e.message}")
+                        }
+
+                    }
+                    else{
+                        Toast.makeText(this, "Lot number or Sales date fields are empty!", Toast.LENGTH_LONG).show()
+                    }
+                    true
+                }
+                R.id.nav_clear -> {
+                    Toast.makeText(this, "Button Clear", Toast.LENGTH_LONG).show()
+                    clearAllTextViews()
+                    editLotNumber.requestFocus() //By default cursor will be at lot number text field
+                    true
+
+                }
+
+                R.id.nav_exit ->{
+                    Toast.makeText(this, "Button Exit", Toast.LENGTH_LONG).show()
+                    true
+                    finish() // Close the activity
+                    exitProcess(0) // Exit the application
+
+                }
+                else -> false
+
+
+            }
+        }
+         */
+
         btnDatePicker.setOnClickListener{
             clickDatePicker()
         }
         btnDatePicker2.setOnClickListener {
             clickDatePicker2()
         }
+
 
         btnSave.setOnClickListener {
 
@@ -154,6 +292,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+
         //btnDelete.setOnClickListener {
         btnDeleteRec.setOnClickListener {
 
@@ -235,6 +375,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
         //Search / View by Lot number, cursor.moveToLast will return the last transaction
         //btnView.setOnClickListener {
         btnSearch.setOnClickListener{
@@ -295,6 +436,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
 
         btnExit.setOnClickListener {
             Toast.makeText(this, "Button Exit", Toast.LENGTH_LONG).show()
