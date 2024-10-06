@@ -23,4 +23,9 @@
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_margin">16dp</dimen>
     <!--END-->
+
+
+    <dimen name="progress_dialog_content_padding">10dp</dimen>
+    <dimen name="progress_text_marginStart">16dp</dimen>
+    <dimen name="progress_text_size">16sp</dimen>
 </resources>

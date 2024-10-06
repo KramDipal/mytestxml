@@ -2,10 +2,12 @@ package eu.tutorials.mytestxml
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     private lateinit var databaseHelper: DatabaseHelper
+    private lateinit var mProgressDialog: Dialog
 
 
     @SuppressLint("MissingInflatedId")
@@ -298,7 +301,11 @@ class MainActivity : AppCompatActivity() {
         //btnDelete.setOnClickListener {
         btnDeleteRec.setOnClickListener {
 
+            Log.d("editLotNumber", "${editLotNumber.text} ${editSaleDate.text}")
+
             if (editLotNumber.text.isNotEmpty()) {
+
+                Log.d("editLotNumber", "Is not empty!!!")
 
                 try {
                     val grandTotPcsSold =
@@ -322,6 +329,7 @@ class MainActivity : AppCompatActivity() {
 
                 } catch (e: Exception) {
                     println("An unexpected error occurred in deleting a record: ${e.message}")
+                    Toast.makeText(this, "Record not found, please check Lot number and transaction date.", Toast.LENGTH_LONG).show()
                 }
 
 
@@ -386,6 +394,8 @@ class MainActivity : AppCompatActivity() {
             //if(editLotNumber.text.isNotEmpty() && editrxno.text.isNotEmpty()) {
             if(editLotNumber.text.isNotEmpty()) {
 
+                showProgressDialog()
+
                 Log.i("btnView","${editrxno.text.toString()} ${editLotNumber.text.toString()} ${editSaleDate.text.toString()}")
                 try {
                     val user =
@@ -424,6 +434,7 @@ class MainActivity : AppCompatActivity() {
                     println("An unexpected error occurred in Viewing a record: ${e.message}")
                     Toast.makeText(this, "No record found!", Toast.LENGTH_LONG).show()
                 }
+                //hideProgressDialog()
             }else{
                 //Toast.makeText(this, "One of the following fields is empty (Lot # | Transaction ID | Transaction date)", Toast.LENGTH_LONG).show()
                 Toast.makeText(this, "Please enter a LOT number", Toast.LENGTH_LONG).show()
@@ -574,6 +585,43 @@ class MainActivity : AppCompatActivity() {
 
         return isEmptyFields
 
+    }
+
+    /**
+     * This function is used to show the progress dialog with the title and message to user.
+     */
+    fun showProgressDialog() {
+
+        //val dialogProg = LayoutInflater.from(this).inflate(R.layout.dialog_progress, null)
+        mProgressDialog = Dialog(this)
+
+        //val tv_progress_text = dialogProg.findViewById<TextView>(R.id.tv_progress_text)
+
+        /*Set the screen content from a layout resource.
+        The resource will be inflated, adding all top-level views to the screen.*/
+        mProgressDialog.setContentView(R.layout.dialog_progress)
+
+        //mProgressDialog.findViewById<TextView>(R.id.tv_progress_text)
+
+        // Simulate loading with a delay
+        Thread {
+            try {
+                Thread.sleep(2000) // Simulate a long task
+            } catch (e: InterruptedException) {
+                e.printStackTrace()
+            }
+            mProgressDialog.dismiss()
+        }.start()
+
+        //Start the dialog and display it on screen.
+        mProgressDialog.show()
+    }
+
+    /**
+     * This function is used to dismiss the progress dialog if it is visible to user.
+     */
+    fun hideProgressDialog() {
+        mProgressDialog.dismiss()
     }
 }
 

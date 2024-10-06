@@ -116,35 +116,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/card_view_content_padding">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/Bag_number"
-                android:textColor="#ff7477"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editBagNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:importantForAutofill="no"
-                android:layout_marginLeft="25sp"
-                android:background="@color/zxing_transparent"
-                />
-
-        </LinearLayout>
-
+    <EditText
+        android:id="@+id/editBagNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Bag_number"
+        android:inputType="number"
+        android:importantForAutofill="no"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        />
 
 
 
@@ -155,6 +136,8 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
+
+        <!--
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -195,8 +178,21 @@
 
 
         </androidx.cardview.widget.CardView>
+        -->
 
-
+        <EditText
+            android:id="@+id/editNoPieces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/zxing_transparent"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textColor="#ff7477"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:hint="Stock Count:"
+            android:textStyle="bold" />
 
         <!--Total no. of pcs sold-->
         <androidx.cardview.widget.CardView
