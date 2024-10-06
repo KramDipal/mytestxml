@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         val btnClear: Button = findViewById(R.id.btnClear)
         val btnSearch: Button = findViewById(R.id.btnSearch)
         val btnDeleteRec: Button = findViewById(R.id.btnDeleteRec)
+        val btnQRcode: Button = findViewById(R.id.btnQRcode)
 
 
         val editLotNumber: EditText = findViewById(R.id.editLotNumber)
@@ -375,7 +376,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
+        btnQRcode.setOnClickListener {
+            Toast.makeText(this, "Qrcode Butoon", Toast.LENGTH_LONG).show()
+        }
         //Search / View by Lot number, cursor.moveToLast will return the last transaction
         //btnView.setOnClickListener {
         btnSearch.setOnClickListener{

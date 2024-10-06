@@ -15,7 +15,7 @@
     <string name="lot_number">Lot #:</string>
     <string name="lot_number2">Lot #2:</string>
     <string name="Bag_number">Bag #:</string>
-    <string name="no_pieces">Total no. of Pieces:</string>
+    <string name="no_pieces">Stock Count:</string>
     <string name="tot_amount">Total Amt: Php</string>
     <string name="Total_no_pcs_sold">Total no. of pcs sold:</string>
     <string name="restock_date">""</string>
