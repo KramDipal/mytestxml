@@ -42,3 +42,19 @@ Make lot number text field the default entry point for the cursor.
 1. Removed Search and delete button.
 2. replaced button with search / delete / report/ save/update/ clear and exit icon.
 3. Added rounded_box.xml for lot # and Search box effect
+
+
+10/06/24
+1.Revise design of particular ei: total no of pcs sold, total amount, remaining count in activity_main.xml
+2. Added progress bar.
+> created dialog-progress and showProgressDialog function
+
+
+
+10/08/24
+1. on update
+> include subtract/ minus and plus adjustments.
+
+2. update activity_main for inputType from numberdecimal to text
+
+3. number inputype to text

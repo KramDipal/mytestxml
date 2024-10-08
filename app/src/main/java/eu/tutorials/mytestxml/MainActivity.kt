@@ -111,6 +111,9 @@ class MainActivity : AppCompatActivity() {
         val editrxno: TextView = findViewById(R.id.editrxno)
         //editrxno.isEnabled = false
 
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
         /*
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -342,13 +345,81 @@ class MainActivity : AppCompatActivity() {
         //Update by Lot number and Transaction date
         btnUpdate.setOnClickListener {
 
+
             if(editLotNumber.text.isNotEmpty() && editSaleDate.text.isNotEmpty())
             {
-                val grandTotPcsSold =
-                    editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString()
-                        .toInt()
-                val editotamountupdate =
+
+
+                val savedValue = sharedPreferences.getInt("savedValue", 0)
+                val savedValueAmount = sharedPreferences.getInt("savedValueAmount", 0)
+
+                Log.i("btnUpdate/editNoPiecesSold", "editNoPiecesSold: ${editNoPiecesSold.text} " +
+                        "savedValue: $savedValue " +
+                        "savedValueAmount: $savedValueAmount")
+
+
+                //For PCS total count - check for '-' sign
+                val str = editNoPiecesSold.text
+                val firstByteIsNegative = str.contains('-')
+
+                //For AMOUNT Total - check for '-' sign
+                val str2 = editAmount.text
+                val firstByteIsNegative2 = str2.contains('-')
+
+                var editotamountupdate: Int
+                var grandTotPcsSold: Int
+                var originalString: String? = null
+                var positiveString: String? = null
+                var originalString2: String? = null
+                var positiveString2: String? = null
+                var newSalesAmountValue = 0
+                var newNOPValue = 0
+
+                //Log.i("btnUpdate/firstByte", "$firstByteIsNegative2 $firstByteIsNegative")
+
+
+                editotamountupdate = if(firstByteIsNegative2) {
+                    originalString = editAmount.text.toString()
+                    positiveString = originalString.replace("-", "")
+
+                    editotamount.text.toString().toInt() - positiveString.toInt()
+                } else{
                     editotamount.text.toString().toInt() + editAmount.text.toString().toInt()
+                }
+
+
+                grandTotPcsSold = if(firstByteIsNegative){
+                    originalString2 = editNoPiecesSold.text.toString()
+                    positiveString2 = originalString2.replace("-", "")
+
+                    editotnopcsold.text.toString().toInt() - positiveString2.toInt()
+
+                }else{
+                    editNoPiecesSold.text.toString().toInt() + editotnopcsold.text.toString().toInt()
+                }
+
+                /*TODO - this is for less/ minus adjustment*/
+                if(firstByteIsNegative2) {
+                    //Assigned new value to editNoPiecesSold, this value will be then save to colum
+                    // "amount" as its new value
+                    newSalesAmountValue = savedValueAmount - (positiveString?.toInt() ?: 0)
+                    editAmount.setText(newSalesAmountValue.toString())
+                }
+                else{
+                    newSalesAmountValue = savedValueAmount + editAmount.text.toString().toInt()
+                    editAmount.setText(newSalesAmountValue.toString())
+                }
+
+                if(firstByteIsNegative) {
+                    //Assigned new value to editNoPiecesSold, this value will be then save to colum
+                    // "no_of_pcs_sold" as its new value
+                    newNOPValue = savedValue - (positiveString2?.toInt() ?: 0)
+                    editNoPiecesSold.setText(newNOPValue.toString())
+                }else{
+                    newNOPValue = savedValue + editNoPiecesSold.text.toString().toInt()
+                    editNoPiecesSold.setText(newNOPValue.toString())
+                }
+                /*TODO - this is for less/ minus adjustment*/
 
                 val user = User(
                     0, editLotNumber.text.toString(),
@@ -359,12 +430,15 @@ class MainActivity : AppCompatActivity() {
                     editTotalIncome.text.toString(), editRemarks.text.toString()
                 )
 
-
+                //To get the Remaining pcs: value
                 val inBalance = user.total_no_of_pieces.toInt() - user.tot_no_of_pcs_sold.toInt()
 
-
+                //Total no. of pcs sold:
                 editotnopcsold.text = grandTotPcsSold.toString()
+
+                //Pass inBalance to EditText View (Remaining pcs:)
                 editBalance.text = inBalance.toString()
+
                 editotamount.text = editotamountupdate.toString()
 
                 /*TODO add computation here for total pcs sold*/
@@ -378,15 +452,20 @@ class MainActivity : AppCompatActivity() {
                     println("An unexpected error occurred in updating a record: ${e.message}")
                 }
 
+
             }
             else{
                 Toast.makeText(this, "Lot number or Sales date fields are empty!", Toast.LENGTH_LONG).show()
             }
+
         }
 
         btnQRcode.setOnClickListener {
             Toast.makeText(this, "Qrcode Butoon", Toast.LENGTH_LONG).show()
         }
+
+
+
         //Search / View by Lot number, cursor.moveToLast will return the last transaction
         //btnView.setOnClickListener {
         btnSearch.setOnClickListener{
@@ -402,9 +481,15 @@ class MainActivity : AppCompatActivity() {
                         //databaseHelper.getUser(editrxno.text.toString(), editLotNumber.text.toString(), editSaleDate.text.toString()) // Example: Get user with ID 1
                         databaseHelper.getUser(editLotNumber.text.toString()) // Example: Get user with ID 1
 
+                    //Saved the current value assigned to editNoPiecesSold.text
+                    //Later use it to add/ subtract to a new value assigned editNoPiecesSold.text
+                    val valueToSave = user?.no_of_pcs_sold.toString().toInt()
+                    editor.putInt("savedValue", valueToSave)
+                    editor.apply()
 
-                   //Log.i("user.toString().length", "${user.toString().length}")
-
+                    val valueToSaveAmount = user?.amount.toString().toInt()
+                    editor.putInt("savedValueAmount", valueToSaveAmount)
+                    editor.apply()
 
 
                     editLotNumber.setText(user?.lot_number)
@@ -426,6 +511,10 @@ class MainActivity : AppCompatActivity() {
                     editotnopcsold.text = user.tot_no_of_pcs_sold
                     editBalance.text = inBalance.toString()
                     editotamount.text = user.totamount
+
+
+
+
 
 
                     Toast.makeText(this, "Record found!", Toast.LENGTH_LONG).show()
